@@ -91,7 +91,7 @@ public class VendingMachineTest {
 
 		fixture.addItem(item, code);
 
-		// add additional test code here
+		
 	}
 
 	/**
@@ -111,22 +111,24 @@ public class VendingMachineTest {
 
 		fixture.addItem(item, code);
 
-		// add additional test code here
+		
 	}
 	
 	@Test(expected = edu.towson.cis.cosc442.project3.vendingmachine.VendingMachineException.class)
 	public void testAddItem_3()
 		throws Exception {
 		VendingMachine fixture = new VendingMachine();
-		fixture.balance = 1.0;
-		VendingMachineItem item = new VendingMachineItem("", 1.0);
-		String code = "";
+		fixture.balance = 2.0;
+		VendingMachineItem item = new VendingMachineItem("B", 2.0);
+		VendingMachineItem item2 = new VendingMachineItem("B", 2.0);
+		String code = "B";
 
 		fixture.addItem(item, code);
+		fixture.addItem(item2, code);
 		
 		assertNull(fixture);
 
-		// add additional test code here
+		
 	}
 	
 	@Test(expected = edu.towson.cis.cosc442.project3.vendingmachine.VendingMachineException.class)
@@ -141,7 +143,7 @@ public class VendingMachineTest {
 		
 		assertNull(fixture);
 
-		// add additional test code here
+		
 	}
 	
 	/**
@@ -177,15 +179,17 @@ public class VendingMachineTest {
 	
 	@Test(expected = edu.towson.cis.cosc442.project3.vendingmachine.VendingMachineException.class)
 	public void testRemoveItem_3()
-		throws Exception {
+			throws Exception {
 		VendingMachine fixture = new VendingMachine();
-		fixture.balance = 1.0;
-		String code = "A";
-
+		VendingMachineItem item = new VendingMachineItem("D", 4.0);
+		fixture.balance = 4.0;
+		String code = "D";
+		fixture.addItem(item, code);
 		VendingMachineItem result = fixture.removeItem(code);
 
 		// add additional test code here
-		assertNotNull(result);
+		
+		assertEquals(item,result);
 	}
 	
 	
@@ -366,6 +370,18 @@ public class VendingMachineTest {
 		
 	}
 	
+	
+	@Test
+	public void testMakePurchase_5()
+		throws Exception {
+		VendingMachine fixture = new VendingMachine();
+		fixture.balance = 4.0;
+		String code = "D";
+		VendingMachineItem item = new VendingMachineItem("D", 4.0);
+		fixture.addItem(item, code);
+		assertTrue(fixture.makePurchase(code));
+		
+	}
 	
 	
 	
